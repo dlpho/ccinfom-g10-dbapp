@@ -1,30 +1,31 @@
-﻿Complete Blood Count,CBC,Hematology,800,Hematology Analyzer,Normal/Abnormal
-Blood Glucose Test,BGT,Endocrinology,500,Glucometer,Normal/Abnormal
-Lipid Profile,LP,Cardiology,1200,Centrifuge,Below Normal/Within Normal/Above Normal
-Liver Function Test,LFT,Hepatology,1000,Biochemistry Analyzer,Normal/Abnormal
-Kidney Function Test,KFT,Nephrology,900,Biochemistry Analyzer,Normal/Abnormal
-Urinalysis,UA,Urology,400,Urine Analyzer,Normal/Abnormal
-Thyroid Function Test,TFT,Endocrinology,1100,Biochemistry Analyzer,Normal/Abnormal
-Pregnancy Test,PT,Obstetrics,300,Immunoassay Analyzer,Positive/Negative
-Prostate-Specific Antigen,PSA,Urology,700,Immunoassay Analyzer,Normal/Abnormal
-Electrolyte Panel,EP,General Medicine,850,Biochemistry Analyzer,Below Normal/Within Normal/Above Normal
-Hemoglobin A1c,A1C,Endocrinology,600,Hematology Analyzer,Below Normal/Within Normal/Above Normal
-Vitamin D Test,VDT,Endocrinology,1200,Biochemistry Analyzer,Below Normal/Within Normal/Above Normal
-C-Reactive Protein,CRP,Rheumatology,650,Immunoassay Analyzer,Normal/Abnormal
-Blood Culture,BC,Microbiology,1500,Incubator,Positive/Negative
-Rapid Strep Test,RST,Microbiology,400,Immunoassay Analyzer,Positive/Negative
-Stool Test,ST,Gastroenterology,500,Stool Analyzer,Normal/Abnormal
-Coagulation Profile,CP,Hematology,1000,Coagulation Analyzer,Normal/Abnormal
-Serum Electrolytes,SE,Nephrology,800,Biochemistry Analyzer,Below Normal/Within Normal/Above Normal
-HIV Test,HIV,Infectious Disease,1000,Immunoassay Analyzer,Positive/Negative
-Hepatitis B Surface Antigen,HBsAg,Infectious Disease,800,Immunoassay Analyzer,Positive/Negative
-Hemoglobin Electrophoresis,HE,Hematology,1200,Hematology Analyzer,Normal/Abnormal
-Calcium Level,CL,Endocrinology,600,Biochemistry Analyzer,Below Normal/Within Normal/Above Normal
-Magnesium Level,ML,Endocrinology,700,Biochemistry Analyzer,Below Normal/Within Normal/Above Normal
-B-Type Natriuretic Peptide,BNP,Cardiology,1300,Immunoassay Analyzer,Low Risk/Moderate Risk/High Risk
-Creatinine Level,CR,Nephrology,500,Biochemistry Analyzer,Below Normal/Within Normal/Above Normal
-Ferritin Level,FL,Hematology,800,Biochemistry Analyzer,Below Normal/Within Normal/Above Normal
-D-dimer Test,DT,Hematology,900,Coagulation Analyzer,Normal/Abnormal
-Folate Level,FL,Hematology,750,Biochemistry Analyzer,Below Normal/Within Normal/Above Normal
-Serum Albumin,SA,General Medicine,700,Biochemistry Analyzer,Below Normal/Within Normal/Above Normal
-COVID-19 Test,C19,Infectious Disease,1200,PCR Analyzer,Positive/Negative
+﻿Aquino,Joaqin,Mercedes,,09123456789
+Bautista,Maria Nicole,Ogay,,09234567890
+Bautista,Alexander Joseph,Escobar,,09345678901
+Cruz,Maria Elena,Abogado,,09456789012
+Tan,Zandy Yola,Faustino,,09567890123
+Chua,Noah,Sy,,09678901234
+Fuentebella,Santino,Parana,,09789012345
+Gamboa,Mikaela Xyra,Tan,,09890123456
+Garcia,Rafael Zander,Liu,,09123456780
+Yap,Allen Ricardo,Macapili,,09234567801
+Ilustre,Justin Blake,Ibanez,,09345678912
+Jambalos,Annalyn,Sarmiento,,09456789023
+Jimenez,Ella Grace,Panganiban,,09567890134
+Salazar,Florante,Alvarado,,09678901245
+Kasilag,Carlo,Bautista,,09789012356
+Llorente,Katnis Faith,Dizon,,09890123467
+Pua,Jazzie,Fajardo,,09123456701
+Meyer,Michael Dale,Quimpo,,09234567812
+Morales,Joseph,Escobar,,09345678923
+Noche,Nikki,Lacuna,,09456789034
+Ocampo,Christopher,Yap,,09567890145
+Pineda,Maricar,Natividad,,09678901256
+Sy,Marcus Aurelius,Villamin,,09789012367
+Lim,Leslie,Pascual,,09890123478
+Rojas,Christian Lee,Sison,,09123456702
+Santos,Avery Joseph,Yuchengco,,09234567813
+Sison,Mark Paolo,Villar,,09345678924
+Pineda,Julienne Victoria,Gokongwei,,09456789035
+Yap,Elena Vivienne,Velasco,,09567890146
+Villanueva,Maria Rosella,Galante,,09678901257
+Webber,Christine Marie,Jorvina,,09789012368
