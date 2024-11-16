@@ -1,0 +1,9 @@
+outcome,outcome_type
+Normal,1
+"Abnormal (Above Normal)",1
+"Abnormal (Below Normal)",1
+Positive,2
+Negative,2
+"Low Risk",3
+"Moderate Risk",3
+"High Risk",3
