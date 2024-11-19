@@ -8,40 +8,38 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema diagnosticsdb
 -- -----------------------------------------------------
 
--- -----------------------------------------------------
--- Schema diagnosticsdb
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `diagnosticsdb` DEFAULT CHARACTER SET utf8mb4 ;
 USE `diagnosticsdb` ;
 
 -- -----------------------------------------------------
--- Table `diagnosticsdb`.`Patients`
+-- Table `Patients`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `diagnosticsdb`.`Patients`;
-CREATE TABLE `diagnosticsdb`.`Patients` (
+DROP TABLE IF EXISTS `Patients`;
+CREATE TABLE `Patients` (
   `patient_id` INT NOT NULL AUTO_INCREMENT,
   `last_name` VARCHAR(20) NOT NULL,
-  `first_name` VARCHAR(20) NOT NULL,
+  `first_name` VARCHAR(45) NOT NULL,
   `middle_name` VARCHAR(20) NOT NULL,
   `date_of_birth` DATE NOT NULL,
   `gender` ENUM('M', 'F') NOT NULL,
   `contact_number` VARCHAR(13) NOT NULL,
-  `insurance_provider` VARCHAR(45) NOT NULL,
+  `insurance_provider` VARCHAR(45) NOT NULL DEFAULT '',
   `insurance_pct` FLOAT NOT NULL DEFAULT 0.0,
   `street` VARCHAR(45) NOT NULL,
   `city` VARCHAR(45) NOT NULL,
   `province` VARCHAR(45) NOT NULL,
-  `zip_code` INT NOT NULL,
-  PRIMARY KEY (`patient_id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 1001; 
+  `zip_code` SMALLINT NOT NULL,
+  PRIMARY KEY (`patient_id`),
+  CONSTRAINT `chk_contact_number` 
+	CHECK (`contact_number` 
+    REGEXP '^09[0-9]{9}$') -- follow 09123456789 format
+) ENGINE = InnoDB AUTO_INCREMENT = 1001;
 
 -- -----------------------------------------------------
--- Data for table `diagnosticsdb`.`Patients`
+-- Data for table `Patients`
 -- -----------------------------------------------------
 LOCK TABLES `Patients` WRITE;
-INSERT INTO `Patients` 
-(`last_name`, `first_name`, `middle_name`, `date_of_birth`, `gender`, `contact_number`, `insurance_provider`, `insurance_pct`, `street`, `city`, `province`, `zip_code`)
+INSERT INTO `Patients` (`last_name`, `first_name`, `middle_name`, `date_of_birth`, `gender`, `contact_number`, `insurance_provider`, `insurance_pct`, `street`, `city`, `province`, `zip_code`)
 VALUES 
 ('Go', 'Rhea Joy', 'Cabuyao', '2001-10-05', 'F', '09123456789', 'Philam Life', 0.34, '2252 Pasong Tamo', 'Makati City', 'Metro Manila', 1200),
 ('Dela Torre', 'Lucas', 'Garcia', '1990-02-17', 'M', '09272345678', '', 0, 'lot 2 block 4 Bartalome', 'Binan', 'Laguna', 4024), 
@@ -123,9 +121,9 @@ VALUES
 ('Prescott', 'Mark Anthony', 'Fernandez', '1999-07-31', 'M', '09329834556', '', 0, 'Insular Village', 'Bansalan', 'Davao del Sur', 8005), 
 ('Torres', 'Mia', 'Shi', '1981-05-08', 'F', '09124657932', '', 0, '51-B Del Monte Avenue ', 'Quezon City', 'Metro Manila', 1100), 
 ('Javelosa', 'Rick', 'Panganiban', '1992-08-27', 'M', '09298765432', 'Lunas Insurance', 0.33, '976 M Naval', 'Navotas', 'Metro Manila', 1400), 
-('Kasilag', 'Kiko', 'Yu', '1982-01-01', 'M', '09376543210', 'Pru Life UK', 0.31, 'Unit 10, Carfel Bldg., Aguirre St.', 'Paranaque', 'Metro Manila', 1700), 
-('Mendoza', 'Joy', 'Bantay', '1995-09-09', 'F', '09175779187', 'Manulife ', 0.18, 'U-11-18 Meralco Avenue', 'Pasig', 'Metro Manila', 1604), 
-('Castillo', 'Ellaine', 'Mabilog', '1988-07-13', 'F', '09183545123', '', 0, '890-A Eusebio Avenue', 'Pasig', 'Metro Manila', 1600), 
+('Kasilag', 'Kiko', 'Yu', '1982-01-01', 'M', '09376543210', 'Pru Life UK', 0.31, 'Unit 10, Carfel Bldg., Aguirre St.', 'Paranaque City', 'Metro Manila', 1700), 
+('Mendoza', 'Joy', 'Bantay', '1995-09-09', 'F', '09175779187', 'Manulife ', 0.18, 'U-11-18 Meralco Avenue', 'Pasig City', 'Metro Manila', 1604), 
+('Castillo', 'Ellaine', 'Mabilog', '1988-07-13', 'F', '09183545123', '', 0, '890-A Eusebio Avenue', 'Pasig City', 'Metro Manila', 1600), 
 ('Aquino', 'Roy', 'Quinto', '1990-04-04', 'M', '09120345366', 'Manulife ', 0.1, '2406 J A Santos Avenue', 'Silang', 'Cavite', 4118), 
 ('Ilagan', 'Ana Marie', 'Tagle', '1997-05-25', 'F', '09298765432', 'Philam Life', 0.22, '34 Morato Street', 'Quezon City', 'Metro Manila', 1100), 
 ('Lopez', 'Daryl John', 'Egina', '1991-01-15', 'M', '09308765432', 'Bayani Seguro', 0.5, '12 Baesa St.', 'Quezon City', 'Metro Manila', 1106), 
@@ -146,33 +144,30 @@ VALUES
 UNLOCK TABLES;
 
 -- -----------------------------------------------------
--- Table `diagnosticsdb`.`Appointments`
+-- Table `Appointments`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `diagnosticsdb`.`Appointments` (
+CREATE TABLE IF NOT EXISTS `Appointments` (
   `appointment_id` INT NOT NULL,
   `patient_id` INT NOT NULL,
   `num_tests` INT NOT NULL COMMENT 'number of tests ordered for this appointment',
   `order_date` DATETIME NOT NULL,
   `scheduled_date` DATETIME NOT NULL,
   `test_date` DATETIME NOT NULL,
-  `status` ENUM('Scheduled', 'Rescheduled', 'In-Progress', 'Pending Payment', 'Completed', 'Follow-Up Required', 'Canceled') NOT NULL,
+  `status` ENUM('Scheduled', 'Rescheduled', 'In-Progress', 'Pending Payment', 'Completed', 'Follow-Up Required', 'Cancelled') NOT NULL,
   PRIMARY KEY (`appointment_id`),
   CONSTRAINT `patient_id`
     FOREIGN KEY (`patient_id`)
     REFERENCES `diagnosticsdb`.`Patients` (`patient_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+) ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `diagnosticsdb`.`Equipment`
+-- Table `Equipment`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `diagnosticsdb`.`Equipment` (
+CREATE TABLE IF NOT EXISTS `Equipment` (
   `equipment_id` VARCHAR(5) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `type` VARCHAR(25) NOT NULL,
-  `location` VARCHAR(25) NOT NULL,
   `status` ENUM('Available', 'Under Maintenance', 'Retired') NOT NULL,
   `condition` VARCHAR(15) NOT NULL,
   `maintenance_start` DATETIME NULL DEFAULT NULL,
@@ -242,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `diagnosticsdb`.`Results` (
   `test_type` VARCHAR(5) NOT NULL,
   `results` ENUM('Normal', 'Abnormal', 'Positive', 'Negative', 'Below Normal', 'Within Normal', 'Above Normal', 'Low Risk', 'Moderate Risk', 'High Risk', 'Invalid') NULL DEFAULT NULL COMMENT 'null if pending or cancelled',
   `comments` TEXT NULL DEFAULT NULL,
-  `status` ENUM('Completed', '', 'Pending', 'Cancelled') NOT NULL,
+  `status` ENUM('Completed', 'Pending', 'Cancelled') NOT NULL,
   PRIMARY KEY (`result_id`),
   CONSTRAINT `fk_Results_Appointments2`
     FOREIGN KEY (`appointment_id`)
