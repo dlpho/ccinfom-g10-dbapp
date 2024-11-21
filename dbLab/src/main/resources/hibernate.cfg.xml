@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+  <session-factory>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/diagnosticsdb</property>
+    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <property name="hibernate.connection.username">user</property>
+    <property name="hibernate.connection.password">pass123</property>
+
+    <!-- Dialect for MySQL 8.0 -->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+    <!-- Automatically update the schema if needed -->
+    <property name="hibernate.hbm2ddl.auto">update</property> <!-- Change to 'validate' or 'none' in production -->
+
+    <!-- Echo all executed SQL to stdout -->
+    <property name="hibernate.show_sql">true</property>
+
+    <!-- Format SQL to be more readable -->
+    <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.use_sql_comments">false</property>
+    <property name="hibernate.generate_statistics">false</property>
+
+    <!-- Mapping the entity classes -->
+    <mapping class="model.entities.Patient"/>
+    <mapping class="model.entities.Staff"/>
+    <mapping class="model.entities.Test"/>
+    <mapping class="model.entities.Appointment"/>
+    <mapping class="model.entities.Equipment"/>
+    <mapping class="model.entities.Payment"/>
+    <mapping class="model.entities.RefInsuranceinfo"/>
+    <mapping class="model.entities.RefOutcome"/>
+    <mapping class="model.entities.RefOutcomeId"/>
+    <mapping class="model.entities.RefOutcomestype"/>
+    <mapping class="model.entities.Result"/>
+    <mapping class="model.entities.ResultId"/>
+  </session-factory>
+
+</hibernate-configuration>
