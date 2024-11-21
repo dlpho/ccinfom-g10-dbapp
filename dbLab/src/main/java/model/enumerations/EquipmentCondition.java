@@ -1,7 +1,18 @@
 package model.enumerations;
 
 public enum EquipmentCondition {
-    Functional,
-    Maintenance_Needed,
-    Out_Of_Order
+    FUNCTIONAL("Functional"),
+    MAINTENANCE("Maintenance Needed"),
+    OUTOFORDER("Out of Order");
+
+    private final String value;
+
+    EquipmentCondition(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

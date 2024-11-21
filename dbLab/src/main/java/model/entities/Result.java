@@ -1,7 +1,8 @@
 package model.entities;
 
-import model.enumerations.*;
 import jakarta.persistence.*;
+import model.enumerations.ResultOutcome;
+import model.enumerations.ResultStatus;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -32,18 +33,19 @@ public class Result {
     @JoinColumn(name = "staff_id", nullable = false)
     private Staff staff;
 
-    @Lob
-    @Column(name = "outcome")
+    @ColumnDefault("'N/A'")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "outcome", nullable = false)
     private ResultOutcome outcome;
 
-    @Lob
-    @Column(name = "comments")
+    @ColumnDefault("''")
+    @Column(name = "comments", nullable = false, length = 256)
     private String comments;
 
     @ColumnDefault("'Pending'")
-    @Lob
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private String status;
+    private ResultStatus status;
 
     public ResultId getId() {
         return id;
@@ -93,11 +95,11 @@ public class Result {
         this.comments = comments;
     }
 
-    public String getStatus() {
+    public ResultStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ResultStatus status) {
         this.status = status;
     }
 

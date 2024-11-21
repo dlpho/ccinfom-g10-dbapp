@@ -1,5 +1,6 @@
 import model.entities.*;
-import model.enumerations.Gender;
+import model.enumerations.*;
+import model.enumerations.StaffRole;
 import org.hibernate.Session;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -55,4 +56,45 @@ public class TestCURD {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void testConnection() {
+        try (Session session = sessionFactory.openSession()) {
+            // Attempt to start a transaction and perform a simple operation
+            session.beginTransaction();
+            // You can perform any operation here like querying an entity or checking metadata
+            System.out.println("SessionFactory connection is good.");
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println("SessionFactory connection failed: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void tryThis(){
+        System.out.println(StaffRole.ADMINISTRATOR);
+    }
+
+    @Test
+    public void matchPatient() {
+        int patientId = 1001;
+        System.out.println(Gender.F);
+
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Patient patient = session.get(Patient.class, patientId);  // Retrieve patient by ID
+            session.getTransaction().commit();
+            if (patient != null) {
+                System.out.println("Patient ID: " + patient.getId());
+                System.out.println("Name: " + patient.getFirstName() + " " + patient.getMiddleName() + " " + patient.getLastName());// Convert code to String
+                System.out.println("Gender: " + patient.getGender().toString());
+                System.out.println("Contact Number: " + patient.getContactNumber());
+                System.out.println("Address: " + patient.getStreet() + ", " + patient.getCity() + ", " + patient.getProvince() + ", " + patient.getZipCode());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();  // Log any exceptions
+        }
+    }
+
 }

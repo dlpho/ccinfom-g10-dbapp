@@ -1,12 +1,23 @@
 package model.enumerations;
 
 public enum ResultOutcome {
-    Normal,
-    Abnormal_Below,
-    Abnormal_Above,
-    Positive,
-    Negative,
-    Risk_Low,
-    Risk_Moderate,
-    Risk_High
+    NORMAL(""),
+    BELOW("Abnormal (Below Range)"),
+    ABOVE("Abnormal (Above Range)"),
+    POSITIVE("Positive"),
+    NEGATIVE("Negative"),
+    LOW("Low Risk"),
+    MODERATE("Moderate Risk"),
+    HIGH("High Risk");
+
+    private final String value;
+
+    ResultOutcome(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

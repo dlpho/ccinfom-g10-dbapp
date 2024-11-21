@@ -926,8 +926,8 @@ diagnosticsdb|schema||user||UPDATE|G</Grants>
     </collation>
     <schema id="288" parent="1" name="diagnosticsdb">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-11-23.05:56:16</LastIntrospectionLocalTimestamp>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+      <LastIntrospectionLocalTimestamp>2024-11-25.17:15:55</LastIntrospectionLocalTimestamp>
+      <CollationName>utf8mb3_general_ci</CollationName>
     </schema>
     <schema id="289" parent="1" name="information_schema">
       <CollationName>utf8mb3_general_ci</CollationName>
@@ -936,564 +936,664 @@ diagnosticsdb|schema||user||UPDATE|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="291" parent="1" name="user"/>
-    <table id="292" parent="288" name="appointments">
+    <routine id="292" parent="288" name="get_appointments">
+      <Definer>root@localhost</Definer>
+      <RoutineKind>procedure</RoutineKind>
+    </routine>
+    <routine id="293" parent="288" name="get_patient_results">
+      <Definer>root@localhost</Definer>
+      <RoutineKind>procedure</RoutineKind>
+    </routine>
+    <routine id="294" parent="288" name="get_results">
+      <Definer>root@localhost</Definer>
+      <RoutineKind>procedure</RoutineKind>
+    </routine>
+    <table id="295" parent="288" name="appointments">
       <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+      <CollationName>utf8mb3_general_ci</CollationName>
     </table>
-    <table id="293" parent="288" name="equipment">
+    <table id="296" parent="288" name="equipment">
       <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+      <CollationName>utf8mb3_general_ci</CollationName>
     </table>
-    <table id="294" parent="288" name="patients">
+    <table id="297" parent="288" name="patients">
       <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+      <CollationName>utf8mb3_general_ci</CollationName>
     </table>
-    <table id="295" parent="288" name="payment">
+    <table id="298" parent="288" name="payments">
       <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+      <CollationName>utf8mb3_general_ci</CollationName>
     </table>
-    <table id="296" parent="288" name="ref_insuranceinfo">
+    <table id="299" parent="288" name="ref_insuranceinfo">
       <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+      <CollationName>utf8mb3_general_ci</CollationName>
     </table>
-    <table id="297" parent="288" name="ref_outcomes">
+    <table id="300" parent="288" name="ref_outcomes">
       <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+      <CollationName>utf8mb3_general_ci</CollationName>
     </table>
-    <table id="298" parent="288" name="ref_outcomestypes">
+    <table id="301" parent="288" name="ref_outcomestypes">
       <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+      <CollationName>utf8mb3_general_ci</CollationName>
     </table>
-    <table id="299" parent="288" name="results">
+    <table id="302" parent="288" name="results">
       <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+      <CollationName>utf8mb3_general_ci</CollationName>
     </table>
-    <table id="300" parent="288" name="staff">
+    <table id="303" parent="288" name="staff">
       <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+      <CollationName>utf8mb3_general_ci</CollationName>
     </table>
-    <table id="301" parent="288" name="tests">
+    <table id="304" parent="288" name="tests">
       <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+      <CollationName>utf8mb3_general_ci</CollationName>
     </table>
-    <column id="302" parent="292" name="appointment_id">
+    <view id="305" parent="288" name="patienthistory">
+      <Definer>root@localhost</Definer>
+      <SourceTextLength>792</SourceTextLength>
+    </view>
+    <argument id="306" parent="292" name="id">
+      <DasType>int|0s</DasType>
+      <Position>1</Position>
+    </argument>
+    <argument id="307" parent="293" name="patient_id">
+      <DasType>int|0s</DasType>
+      <Position>1</Position>
+    </argument>
+    <argument id="308" parent="294" name="id">
+      <DasType>int|0s</DasType>
+      <Position>1</Position>
+    </argument>
+    <column id="309" parent="295" name="appointment_id">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="303" parent="292" name="patient_id">
+    <column id="310" parent="295" name="patient_id">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="304" parent="292" name="num_tests">
+    <column id="311" parent="295" name="num_tests">
       <Comment>number of tests ordered for this appointment</Comment>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="305" parent="292" name="order_date">
+    <column id="312" parent="295" name="order_date">
       <DasType>datetime|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="306" parent="292" name="scheduled_date">
+    <column id="313" parent="295" name="scheduled_date">
       <DasType>datetime|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="307" parent="292" name="test_date">
-      <Comment>default if havent done any test</Comment>
+    <column id="314" parent="295" name="test_date">
+      <Comment>default if haven&apos;t done any test</Comment>
       <DasType>datetime|0s</DasType>
       <DefaultExpression>&apos;9999-01-01 00:00:00&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="308" parent="292" name="status">
-      <DasType>enum(&apos;Scheduled&apos;, &apos;Rescheduled&apos;, &apos;In-Progress&apos;, &apos;Pending Payment&apos;, &apos;Completed&apos;, &apos;Follow-Up Required&apos;, &apos;Canceled&apos;)|0e</DasType>
+    <column id="315" parent="295" name="status">
+      <DasType>enum(&apos;In-Progress&apos;, &apos;Pending Payment&apos;, &apos;Completed&apos;, &apos;Completed w/ Follow-up Advised)&apos;, &apos;Canceled&apos;)|0e</DasType>
+      <DefaultExpression>&apos;In-Progress&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <foreign-key id="309" parent="292" name="patient_id">
+    <foreign-key id="316" parent="295" name="patient_id">
       <ColNames>patient_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>patient_id</RefColNames>
       <RefTableName>patients</RefTableName>
     </foreign-key>
-    <index id="310" parent="292" name="PRIMARY">
+    <index id="317" parent="295" name="PRIMARY">
       <ColNames>appointment_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="311" parent="292" name="patient_id_idx">
+    <index id="318" parent="295" name="patient_id_idx">
       <ColNames>patient_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="312" parent="292" name="PRIMARY">
+    <key id="319" parent="295" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <trigger id="313" parent="292" name="Appointments_Limit1PerDay">
+    <trigger id="320" parent="295" name="Appointments_Limit1PerDay">
       <Definer>root@localhost</Definer>
       <Events>I</Events>
       <SourceTextLength>638</SourceTextLength>
       <Turn>before-row</Turn>
     </trigger>
-    <trigger id="314" parent="292" name="Appointments_LimitNumTests">
+    <trigger id="321" parent="295" name="Appointments_LimitNumTests">
       <Definer>root@localhost</Definer>
       <Events>I</Events>
       <SourceTextLength>213</SourceTextLength>
       <Turn>before-row</Turn>
     </trigger>
-    <trigger id="315" parent="292" name="Appointments_CancelResults">
+    <trigger id="322" parent="295" name="Appointments_MakePayment">
       <Definer>root@localhost</Definer>
       <Events>U</Events>
-      <SourceTextLength>323</SourceTextLength>
+      <SourceTextLength>643</SourceTextLength>
     </trigger>
-    <column id="316" parent="293" name="equip_name">
+    <column id="323" parent="296" name="equip_name">
       <DasType>varchar(45)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="317" parent="293" name="location">
+    <column id="324" parent="296" name="location">
       <DasType>enum(&apos;Hematology Lab&apos;, &apos;Biochemistry Lab&apos;, &apos;Microbiology Lab&apos;, &apos;Imaging Lab&apos;)|0e</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="318" parent="293" name="condition">
+    <column id="325" parent="296" name="condition">
       <DasType>enum(&apos;Functional&apos;, &apos;Needs Maintenance&apos;, &apos;Out of Order&apos;)|0e</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="319" parent="293" name="maintenance_start">
+    <column id="326" parent="296" name="maintenance_start">
       <DasType>datetime|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="320" parent="293" name="maintenance_end">
+    <column id="327" parent="296" name="maintenance_end">
       <DasType>datetime|0s</DasType>
       <Position>5</Position>
     </column>
-    <index id="321" parent="293" name="PRIMARY">
+    <index id="328" parent="296" name="PRIMARY">
       <ColNames>equip_name</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="322" parent="293" name="PRIMARY">
+    <key id="329" parent="296" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="323" parent="294" name="patient_id">
-      <AutoIncrement>1101</AutoIncrement>
+    <column id="330" parent="297" name="patient_id">
+      <AutoIncrement>1100</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="324" parent="294" name="last_name">
+    <column id="331" parent="297" name="last_name">
       <DasType>varchar(20)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="325" parent="294" name="first_name">
+    <column id="332" parent="297" name="first_name">
       <DasType>varchar(20)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="326" parent="294" name="middle_name">
+    <column id="333" parent="297" name="middle_name">
       <DasType>varchar(20)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="327" parent="294" name="date_of_birth">
+    <column id="334" parent="297" name="date_of_birth">
       <DasType>date|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="328" parent="294" name="gender">
+    <column id="335" parent="297" name="gender">
       <DasType>enum(&apos;M&apos;, &apos;F&apos;)|0e</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="329" parent="294" name="contact_number">
+    <column id="336" parent="297" name="contact_number">
       <DasType>varchar(13)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="330" parent="294" name="street">
+    <column id="337" parent="297" name="street">
       <DasType>varchar(45)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <column id="331" parent="294" name="city">
+    <column id="338" parent="297" name="city">
       <DasType>varchar(45)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>9</Position>
     </column>
-    <column id="332" parent="294" name="province">
+    <column id="339" parent="297" name="province">
       <DasType>varchar(45)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>10</Position>
     </column>
-    <column id="333" parent="294" name="zip_code">
+    <column id="340" parent="297" name="zip_code">
       <DasType>smallint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>11</Position>
     </column>
-    <column id="334" parent="294" name="insurance_provider">
+    <column id="341" parent="297" name="insurance_provider">
       <DasType>varchar(45)|0s</DasType>
       <Position>12</Position>
     </column>
-    <foreign-key id="335" parent="294" name="fk_Patients_InsuranceInfo1">
+    <foreign-key id="342" parent="297" name="fk_Patients_InsuranceInfo1">
       <ColNames>insurance_provider</ColNames>
       <OnDelete>set-null</OnDelete>
       <RefColNames>insurance_provider</RefColNames>
       <RefTableName>ref_insuranceinfo</RefTableName>
     </foreign-key>
-    <index id="336" parent="294" name="PRIMARY">
+    <index id="343" parent="297" name="PRIMARY">
       <ColNames>patient_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="337" parent="294" name="contact_number_UNIQUE">
+    <index id="344" parent="297" name="contact_number_UNIQUE">
       <ColNames>contact_number</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="338" parent="294" name="fk_Patients_InsuranceInfo1_idx">
+    <index id="345" parent="297" name="fk_Patients_InsuranceInfo1_idx">
       <ColNames>insurance_provider</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="339" parent="294" name="PRIMARY">
+    <key id="346" parent="297" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="340" parent="294" name="contact_number_UNIQUE">
+    <key id="347" parent="297" name="contact_number_UNIQUE">
       <UnderlyingIndexName>contact_number_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="341" parent="295" name="payment_id">
+    <column id="348" parent="298" name="payment_id">
+      <AutoIncrement>4000</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="342" parent="295" name="appointment_id">
+    <column id="349" parent="298" name="appointment_id">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="343" parent="295" name="total_cost">
-      <DasType>double|0s</DasType>
+    <column id="350" parent="298" name="total_cost">
+      <DasType>decimal(7,2 digit)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="344" parent="295" name="payment_method">
-      <DasType>enum(&apos;Cash&apos;, &apos;Credit Card&apos;, &apos;Debit Card&apos;, &apos;Online Payment&apos;)|0e</DasType>
+    <column id="351" parent="298" name="payment_method">
+      <DasType>enum(&apos;N/A&apos;, &apos;Cash&apos;, &apos;Credit Card&apos;, &apos;Debit Card&apos;, &apos;Online Payment&apos;)|0e</DasType>
+      <DefaultExpression>&apos;N/A&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="345" parent="295" name="date_paid">
+    <column id="352" parent="298" name="date_paid">
       <Comment>default if unpaid</Comment>
       <DasType>datetime|0s</DasType>
       <DefaultExpression>&apos;9999-01-01 00:00:00&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <foreign-key id="346" parent="295" name="order_id">
+    <foreign-key id="353" parent="298" name="order_id">
       <ColNames>appointment_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>appointment_id</RefColNames>
       <RefTableName>appointments</RefTableName>
     </foreign-key>
-    <index id="347" parent="295" name="PRIMARY">
+    <index id="354" parent="298" name="PRIMARY">
       <ColNames>payment_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="348" parent="295" name="order_id_idx">
+    <index id="355" parent="298" name="order_id_idx">
       <ColNames>appointment_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="349" parent="295" name="PRIMARY">
+    <key id="356" parent="298" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="350" parent="296" name="insurance_provider">
-      <DasType>varchar(45)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="351" parent="296" name="pct_coverage">
-      <DasType>decimal(3,2 digit)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="352" parent="296" name="min_amount">
-      <DasType>double|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <index id="353" parent="296" name="PRIMARY">
-      <ColNames>insurance_provider</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="354" parent="296" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <trigger id="355" parent="296" name="REF_InsuranceInfo_Pct">
-      <Definer>root@localhost</Definer>
-      <Events>I</Events>
-      <SourceTextLength>275</SourceTextLength>
-      <Turn>before-row</Turn>
-    </trigger>
-    <column id="356" parent="297" name="outcome">
-      <DasType>varchar(30)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="357" parent="297" name="outcome_type">
-      <DasType>tinyint|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <foreign-key id="358" parent="297" name="fk_REF_Outcomes_REF_OutcomesTypes1">
-      <ColNames>outcome_type</ColNames>
-      <RefColNames>outcome_type</RefColNames>
-      <RefTableName>ref_outcomestypes</RefTableName>
-    </foreign-key>
-    <index id="359" parent="297" name="PRIMARY">
-      <ColNames>outcome
-outcome_type</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="360" parent="297" name="fk_REF_Outcomes_REF_OutcomesTypes1_idx">
-      <ColNames>outcome_type</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="361" parent="297" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="362" parent="298" name="outcome_type">
-      <DasType>tinyint|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <index id="363" parent="298" name="PRIMARY">
-      <ColNames>outcome_type</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="364" parent="298" name="index2">
-      <ColNames>outcome_type</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="365" parent="298" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="366" parent="299" name="appointment_id">
-      <DasType>int|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="367" parent="299" name="test_type">
-      <DasType>varchar(5)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="368" parent="299" name="staff_id">
-      <DasType>int|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <column id="369" parent="299" name="outcome">
-      <DasType>enum(&apos;Normal&apos;, &apos;Abnormal (Below Normal)&apos;, &apos;Abnormal (Above Normal)&apos;, &apos;Positive&apos;, &apos;Negative&apos;, &apos;Low Risk&apos;, &apos;Moderate Risk&apos;, &apos;High Risk&apos;, &apos;Invalid/Inconvlusive&apos;)|0e</DasType>
-      <Position>4</Position>
-    </column>
-    <column id="370" parent="299" name="comments">
-      <DasType>text|0s</DasType>
-      <Position>5</Position>
-    </column>
-    <column id="371" parent="299" name="status">
-      <DasType>enum(&apos;Completed&apos;, &apos;&apos;, &apos;Pending&apos;, &apos;Cancelled&apos;)|0e</DasType>
-      <DefaultExpression>&apos;Pending&apos;</DefaultExpression>
-      <NotNull>1</NotNull>
-      <Position>6</Position>
-    </column>
-    <foreign-key id="372" parent="299" name="fk_Results_Appointments2">
-      <ColNames>appointment_id</ColNames>
-      <OnDelete>cascade</OnDelete>
-      <RefColNames>appointment_id</RefColNames>
-      <RefTableName>appointments</RefTableName>
-    </foreign-key>
-    <foreign-key id="373" parent="299" name="fk_Results_Tests2">
-      <ColNames>test_type</ColNames>
-      <OnDelete>cascade</OnDelete>
-      <RefColNames>test_type</RefColNames>
-      <RefTableName>tests</RefTableName>
-    </foreign-key>
-    <foreign-key id="374" parent="299" name="fk_Results_Staff2">
-      <ColNames>staff_id</ColNames>
-      <RefColNames>staff_id</RefColNames>
-      <RefTableName>staff</RefTableName>
-    </foreign-key>
-    <index id="375" parent="299" name="PRIMARY">
-      <ColNames>appointment_id
-test_type</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="376" parent="299" name="fk_Results_Appointments2_idx">
-      <ColNames>appointment_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="377" parent="299" name="fk_Results_Tests2_idx">
-      <ColNames>test_type</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="378" parent="299" name="fk_Results_Staff2_idx">
-      <ColNames>staff_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="379" parent="299" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <trigger id="380" parent="299" name="Results_LimitToNumOrdered">
+    <trigger id="357" parent="298" name="Payments_ApptCanceled">
       <Definer>root@localhost</Definer>
       <Events>I</Events>
       <SourceTextLength>560</SourceTextLength>
       <Turn>before-row</Turn>
     </trigger>
-    <trigger id="381" parent="299" name="Results_NoSameTestType">
+    <trigger id="358" parent="298" name="Payments_NoPayAllCancel">
+      <Definer>root@localhost</Definer>
+      <Events>I</Events>
+      <SourceTextLength>571</SourceTextLength>
+      <Turn>before-row</Turn>
+    </trigger>
+    <trigger id="359" parent="298" name="Payments_CompleteAppt">
+      <Definer>root@localhost</Definer>
+      <Events>U</Events>
+      <SourceTextLength>535</SourceTextLength>
+    </trigger>
+    <column id="360" parent="299" name="insurance_provider">
+      <DasType>varchar(45)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="361" parent="299" name="pct_coverage">
+      <DasType>decimal(3,2 digit)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="362" parent="299" name="min_amount">
+      <DasType>decimal(7,2 digit)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <index id="363" parent="299" name="PRIMARY">
+      <ColNames>insurance_provider</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="364" parent="299" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <trigger id="365" parent="299" name="REF_InsuranceInfo_Pct">
+      <Definer>root@localhost</Definer>
+      <Events>I</Events>
+      <SourceTextLength>276</SourceTextLength>
+      <Turn>before-row</Turn>
+    </trigger>
+    <column id="366" parent="300" name="outcome">
+      <DasType>varchar(45)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="367" parent="300" name="outcome_type">
+      <DasType>tinyint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <foreign-key id="368" parent="300" name="fk_REF_Outcomes_REF_OutcomesTypes1">
+      <ColNames>outcome_type</ColNames>
+      <RefColNames>outcome_type</RefColNames>
+      <RefTableName>ref_outcomestypes</RefTableName>
+    </foreign-key>
+    <index id="369" parent="300" name="PRIMARY">
+      <ColNames>outcome
+outcome_type</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="370" parent="300" name="fk_REF_Outcomes_REF_OutcomesTypes1_idx">
+      <ColNames>outcome_type</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="371" parent="300" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="372" parent="301" name="outcome_type">
+      <DasType>tinyint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <index id="373" parent="301" name="PRIMARY">
+      <ColNames>outcome_type</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="374" parent="301" name="index2">
+      <ColNames>outcome_type</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="375" parent="301" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="376" parent="302" name="appointment_id">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="377" parent="302" name="test_type">
+      <DasType>varchar(5)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="378" parent="302" name="staff_id">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="379" parent="302" name="outcome">
+      <DasType>enum(&apos;N/A&apos;, &apos;Normal&apos;, &apos;Abnormal (Below Range)&apos;, &apos;Abnormal (Above Range)&apos;, &apos;Positive&apos;, &apos;Negative&apos;, &apos;Low Risk&apos;, &apos;Moderate Risk&apos;, &apos;High Risk&apos;, &apos;Inconclusive&apos;)|0e</DasType>
+      <DefaultExpression>&apos;N/A&apos;</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="380" parent="302" name="comments">
+      <DasType>varchar(256)|0s</DasType>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <column id="381" parent="302" name="status">
+      <DasType>enum(&apos;Completed&apos;, &apos;Pending&apos;, &apos;Canceled&apos;)|0e</DasType>
+      <DefaultExpression>&apos;Pending&apos;</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+    </column>
+    <foreign-key id="382" parent="302" name="fk_Results_Appointments2">
+      <ColNames>appointment_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>appointment_id</RefColNames>
+      <RefTableName>appointments</RefTableName>
+    </foreign-key>
+    <foreign-key id="383" parent="302" name="fk_Results_Tests2">
+      <ColNames>test_type</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>test_type</RefColNames>
+      <RefTableName>tests</RefTableName>
+    </foreign-key>
+    <foreign-key id="384" parent="302" name="fk_Results_Staff2">
+      <ColNames>staff_id</ColNames>
+      <RefColNames>staff_id</RefColNames>
+      <RefTableName>staff</RefTableName>
+    </foreign-key>
+    <index id="385" parent="302" name="PRIMARY">
+      <ColNames>appointment_id
+test_type</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="386" parent="302" name="fk_Results_Appointments2_idx">
+      <ColNames>appointment_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="387" parent="302" name="fk_Results_Tests2_idx">
+      <ColNames>test_type</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="388" parent="302" name="fk_Results_Staff2_idx">
+      <ColNames>staff_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="389" parent="302" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <trigger id="390" parent="302" name="Results_LimitToNumOrdered">
+      <Definer>root@localhost</Definer>
+      <Events>I</Events>
+      <SourceTextLength>560</SourceTextLength>
+      <Turn>before-row</Turn>
+    </trigger>
+    <trigger id="391" parent="302" name="Results_NoSameTestType">
       <Definer>root@localhost</Definer>
       <Events>I</Events>
       <SourceTextLength>643</SourceTextLength>
       <Turn>before-row</Turn>
     </trigger>
-    <column id="382" parent="300" name="staff_id">
-      <AutoIncrement>2032</AutoIncrement>
+    <trigger id="392" parent="302" name="Results_ValidateOutcome">
+      <Definer>root@localhost</Definer>
+      <Events>I</Events>
+      <SourceTextLength>497</SourceTextLength>
+      <Turn>before-row</Turn>
+    </trigger>
+    <trigger id="393" parent="302" name="Results_CancelAppt">
+      <Definer>root@localhost</Definer>
+      <Events>U</Events>
+      <SourceTextLength>774</SourceTextLength>
+    </trigger>
+    <trigger id="394" parent="302" name="Results_CompleteAppt">
+      <Definer>root@localhost</Definer>
+      <Events>U</Events>
+      <SourceTextLength>1119</SourceTextLength>
+    </trigger>
+    <column id="395" parent="303" name="staff_id">
+      <AutoIncrement>2031</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="383" parent="300" name="first_name">
+    <column id="396" parent="303" name="first_name">
       <DasType>varchar(20)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="384" parent="300" name="last_name">
+    <column id="397" parent="303" name="last_name">
       <DasType>varchar(20)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="385" parent="300" name="middle_name">
+    <column id="398" parent="303" name="middle_name">
       <DasType>varchar(20)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="386" parent="300" name="role">
+    <column id="399" parent="303" name="role">
       <DasType>enum(&apos;Technician&apos;, &apos;Doctor&apos;, &apos;Nurse&apos;, &apos;Administrator&apos;, &apos;Receptionist&apos;, &apos;Billing Clerk&apos;)|0e</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="387" parent="300" name="contact_number">
+    <column id="400" parent="303" name="contact_number">
       <DasType>varchar(13)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <index id="388" parent="300" name="PRIMARY">
+    <index id="401" parent="303" name="PRIMARY">
       <ColNames>staff_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="389" parent="300" name="contact_number_UNIQUE">
+    <index id="402" parent="303" name="contact_number_UNIQUE">
       <ColNames>contact_number</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="390" parent="300" name="PRIMARY">
+    <key id="403" parent="303" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="391" parent="300" name="contact_number_UNIQUE">
+    <key id="404" parent="303" name="contact_number_UNIQUE">
       <UnderlyingIndexName>contact_number_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="392" parent="301" name="test_type">
+    <column id="405" parent="304" name="test_type">
       <DasType>varchar(5)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="393" parent="301" name="test_name">
+    <column id="406" parent="304" name="test_name">
       <DasType>varchar(45)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="394" parent="301" name="equip_name">
+    <column id="407" parent="304" name="equip_name">
       <DasType>varchar(45)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="395" parent="301" name="test_cost">
-      <DasType>double|0s</DasType>
+    <column id="408" parent="304" name="test_cost">
+      <DasType>decimal(7,2 digit)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="396" parent="301" name="days_valid">
+    <column id="409" parent="304" name="days_valid">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="397" parent="301" name="outcome_type">
+    <column id="410" parent="304" name="outcome_type">
       <DasType>tinyint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <foreign-key id="398" parent="301" name="fk_Tests_Equipment1">
+    <foreign-key id="411" parent="304" name="fk_Tests_Equipment1">
       <ColNames>equip_name</ColNames>
       <RefColNames>equip_name</RefColNames>
       <RefTableName>equipment</RefTableName>
     </foreign-key>
-    <foreign-key id="399" parent="301" name="fk_Tests_REF_ChoiceTypes1">
+    <foreign-key id="412" parent="304" name="fk_Tests_REF_ChoiceTypes1">
       <ColNames>outcome_type</ColNames>
       <RefColNames>outcome_type</RefColNames>
       <RefTableName>ref_outcomestypes</RefTableName>
     </foreign-key>
-    <index id="400" parent="301" name="PRIMARY">
+    <index id="413" parent="304" name="PRIMARY">
       <ColNames>test_type</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="401" parent="301" name="test_name_UNIQUE">
+    <index id="414" parent="304" name="test_name_UNIQUE">
       <ColNames>test_name</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="402" parent="301" name="fk_Tests_Equipment1_idx">
+    <index id="415" parent="304" name="fk_Tests_Equipment1_idx">
       <ColNames>equip_name</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="403" parent="301" name="fk_Tests_REF_ChoiceTypes1_idx">
+    <index id="416" parent="304" name="fk_Tests_REF_ChoiceTypes1_idx">
       <ColNames>outcome_type</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="404" parent="301" name="PRIMARY">
+    <key id="417" parent="304" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="405" parent="301" name="test_name_UNIQUE">
+    <key id="418" parent="304" name="test_name_UNIQUE">
       <UnderlyingIndexName>test_name_UNIQUE</UnderlyingIndexName>
     </key>
+    <column id="419" parent="305" name="patient_id">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="420" parent="305" name="fullname">
+      <DasType>varchar(65)|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="421" parent="305" name="test_date">
+      <DasType>date|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <column id="422" parent="305" name="valid_until">
+      <DasType>date|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <column id="423" parent="305" name="test_name">
+      <DasType>varchar(45)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <column id="424" parent="305" name="outcome">
+      <DasType>enum(&apos;N/A&apos;, &apos;Normal&apos;, &apos;Abnormal (Below Range)&apos;, &apos;Abnormal (Above Range)&apos;, &apos;Positive&apos;, &apos;Negative&apos;, &apos;Low Risk&apos;, &apos;Moderate Risk&apos;, &apos;High Risk&apos;, &apos;Inconclusive&apos;)|0e</DasType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+    </column>
+    <column id="425" parent="305" name="comments">
+      <DasType>varchar(256)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+    </column>
   </database-model>
 </dataSource>
