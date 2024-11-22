@@ -1,14 +1,17 @@
-﻿Hematology Analyzer,Lab Room 1
-Glucometer,Exam Room
-Centrifuge,Lab Room 2
-Biochemistry Analyzer,Lab Room 3
-Urine Analyzer,Sample Processing Room
-Immunoassay Analyzer,Lab Room 4
-Incubator,Microbiology Lab
-Stool Analyzer,Microbiology Lab
-Coagulation Analyzer,Lab Room 1
-PCR Analyzer,Molecular Diagnostics Lab
-X-Ray Machine,Radiology Department
-Ultrasound Machine,Imaging Room
-CT Scanner,Radiology Department
-MRI Scanner,MRI Suite
+equip_name,location,condition,maintenance_start,maintenance_end
+"Hematology Analyzer","Hematology Lab",Functional,NULL,NULL
+Glucometer,"Hematology Lab",Functional,NULL,NULL
+Centrifuge,"Hematology Lab",Functional,NULL,NULL
+"Biochemistry Analyzer","Biochemistry Lab",Functional,NULL,NULL
+"Urine Analyzer","Biochemistry Lab",Functional,NULL,NULL
+"Immunoassay Analyzer","Biochemistry Lab",Functional,NULL,NULL
+Incubator,"Microbiology Lab",Functional,NULL,NULL
+"Stool Analyzer","Microbiology Lab",Functional,NULL,NULL
+"Coagulation Analyzer","Hematology Lab",Functional,NULL,NULL
+"PCR Analyzer","Microbiology Lab",Functional,NULL,NULL
+"X-Ray Machine","Imaging Lab",Functional,NULL,NULL
+"Ultrasound Machine","Imaging Lab",Functional,NULL,NULL
+"CT Scanner","Imaging Lab",Functional,NULL,NULL
+"MRI Scanner","Imaging Lab",Functional,NULL,NULL
+Electrocardiogram,"Imaging Lab",Functional,NULL,NULL
+"Blood Pressure Monitor","Hematology Lab",Functional,NULL,NULL
