@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `diagnosticsdb`.`Appointments` (
   `order_date` DATETIME NOT NULL,
   `scheduled_date` DATETIME NOT NULL,
   `test_date` DATETIME NOT NULL DEFAULT '9999-01-01 00:00:00' COMMENT 'default if haven\'t done any test',
-  `status` ENUM('Scheduled', 'Rescheduled', 'In-Progress', 'Pending Payment', 'Completed', 'Completed w/ Follow-up Advised)', 'Canceled') NOT NULL,
+  `status` ENUM('In-Progress', 'Pending Payment', 'Completed', 'Completed w/ Follow-up Advised)', 'Canceled') NOT NULL DEFAULT 'In-Progress',
   PRIMARY KEY (`appointment_id`),
   INDEX `patient_id_idx` (`patient_id` ASC) VISIBLE,
   CONSTRAINT `patient_id`
@@ -186,8 +186,8 @@ CREATE TABLE IF NOT EXISTS `diagnosticsdb`.`Results` (
   `appointment_id` INT NOT NULL,
   `test_type` VARCHAR(5) NOT NULL,
   `staff_id` INT NOT NULL,
-  `outcome` ENUM('Normal', 'Abnormal-Below', 'Abnormal-Above', 'Positive', 'Negative', 'Low Risk', 'Moderate Risk', 'High Risk', 'Invalid/Inconvlusive') NULL,
-  `comments` TEXT NULL DEFAULT NULL,
+  `outcome` ENUM('N/A', 'Normal', 'Abnormal (Below Range)', 'Abnormal (Above Range)', 'Positive', 'Negative', 'Low Risk', 'Moderate Risk', 'High Risk', 'Inconclusive') NOT NULL DEFAULT 'N/A',
+  `comments` VARCHAR(256) NOT NULL DEFAULT '',
   `status` ENUM('Completed', 'Pending', 'Canceled') NOT NULL DEFAULT 'Pending',
   INDEX `fk_Results_Appointments2_idx` (`appointment_id` ASC) VISIBLE,
   INDEX `fk_Results_Staff2_idx` (`staff_id` ASC) VISIBLE,
@@ -229,6 +229,11 @@ CREATE TABLE IF NOT EXISTS `diagnosticsdb`.`REF_Outcomes` (
 ENGINE = InnoDB;
 
 USE `diagnosticsdb` ;
+
+-- -----------------------------------------------------
+-- Placeholder table for view `diagnosticsdb`.`patienthistory`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `diagnosticsdb`.`patienthistory` (`patient_id` INT, `fullname` INT, `test_date` INT, `valid_until` INT, `test_name` INT, `outcome` INT, `comments` INT);
 
 -- -----------------------------------------------------
 -- procedure get_appointments
@@ -284,6 +289,37 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- View `diagnosticsdb`.`patienthistory`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `diagnosticsdb`.`patienthistory`;
+DROP VIEW IF EXISTS `diagnosticsdb`.`patienthistory` ;
+USE `diagnosticsdb`;
+CREATE  OR REPLACE VIEW `patienthistory` AS 
+
+SELECT 
+    p.patient_id, 
+	UPPER(CONCAT(last_name, ', ', first_name, ' (', middle_name,')')) AS fullname,
+    DATE(a.test_date) AS test_date, -- Show only the date part
+    DATE(DATE_ADD(a.test_date, INTERVAL t.days_valid DAY)) AS valid_until, -- Calculate valid_until as a date
+    t.test_name, 
+    r.outcome, 
+    r.comments
+FROM 
+    patients p
+JOIN 
+    appointments a ON p.patient_id = a.patient_id
+JOIN 
+    results r ON a.appointment_id = r.appointment_id 
+JOIN 
+    tests t ON t.test_type = r.test_type
+WHERE 
+    r.status = 'Completed'
+GROUP BY 
+    p.patient_id, a.test_date, t.test_name, r.outcome, r.comments
+ORDER BY 
+    p.patient_id, a.test_date ASC;
 USE `diagnosticsdb`;
 
 DELIMITER $$
@@ -356,11 +392,16 @@ BEGIN
 		SELECT SUM(t.test_cost) INTO total_cost
 		FROM Results r
 		JOIN Tests t ON t.test_type = r.test_type
-		WHERE appointment_id = NEW.appointment_id AND r.status = 'Completed';	
+		WHERE appointment_id = NEW.appointment_id AND r.status LIKE 'Completed%';	
 		
         -- Create payment entry
         INSERT INTO `Payments` (total_cost, appointment_id)
         VALUES (total_cost, NEW.appointment_id);
+        
+        UPDATE appointments
+        SET status = 'Pending Payment'
+        WHERE appointment_id = NEW.appointment_id;
+        
     END IF;
 END;$$
 
@@ -415,19 +456,23 @@ END;$$
 
 
 USE `diagnosticsdb`$$
-DROP TRIGGER IF EXISTS `diagnosticsdb`.`Payment_UpdateApptStatus` $$
+DROP TRIGGER IF EXISTS `diagnosticsdb`.`Payments_CompleteAppt_WRONG_SCHEMA` $$
 USE `diagnosticsdb`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `diagnosticsdb`.`Payment_UpdateApptStatus`
+CREATE DEFINER = CURRENT_USER TRIGGER `diagnosticsdb`.`Payments_CompleteAppt` 
 AFTER UPDATE ON `Payments`
 FOR EACH ROW
 BEGIN
-    -- Check if the new payment_method is not 'Unpaid'
-    IF NEW.payment_method != 'N/A' THEN
-        -- Update the corresponding Appointments status to 'Completed'
+    -- Check if payment_method has changed and the new payment_method is not 'N/A'
+    IF OLD.payment_method != NEW.payment_method AND NEW.payment_method != 'N/A' THEN
+        -- Update the current Payments record with the current date
+        UPDATE Payments
+        SET date = NOW()
+        WHERE appointment_id = NEW.appointment_id;
+        
+        -- Update the Appointments status to 'Completed'
         UPDATE Appointments
-        SET status = 'Completed',
-            date_paid = NOW()  -- Set the date_paid to the current timestamp
-        WHERE appointment_id = NEW.appointment_id; -- Assuming there's an appointment_id in Payment that links to Appointments
+        SET status = 'Completed'
+        WHERE appointment_id = NEW.appointment_id;
     END IF;
 END;$$
 
@@ -479,26 +524,64 @@ END;$$
 
 
 USE `diagnosticsdb`$$
+DROP TRIGGER IF EXISTS `diagnosticsdb`.`Results_ValidateOutcome` $$
+USE `diagnosticsdb`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `diagnosticsdb`.`Results_ValidateOutcome` 
+BEFORE INSERT ON `Results` 
+FOR EACH ROW
+BEGIN
+    -- Automatically adjust outcome for Pending
+    IF NEW.status = 'Pending' THEN
+        SET NEW.outcome = 'N/A';
+    END IF;
+
+    -- Automatically adjust outcome for Canceled
+    IF NEW.status = 'Canceled' THEN
+        SET NEW.outcome = 'N/A';
+    END IF;
+
+    -- Prevent Completed with N/A outcome
+    IF NEW.status = 'Completed' AND NEW.outcome = 'N/A' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Outcome cannot be N/A when the status is Completed';
+    END IF;
+END;$$
+
+
+USE `diagnosticsdb`$$
 DROP TRIGGER IF EXISTS `diagnosticsdb`.`Results_CompleteAppt` $$
 USE `diagnosticsdb`$$
 CREATE DEFINER = CURRENT_USER TRIGGER `diagnosticsdb`.`Results_CompleteAppt` 
 AFTER UPDATE ON `Results` 
 FOR EACH ROW
 BEGIN
-    -- Declare a variable to count results with invalid status
+    -- Declare variables to count results with 'Pending' and 'Inconclusive' status
     DECLARE not_done INT;
+    DECLARE inconclusive_found INT;
 
-    -- Check if there are any results with status other than 'Completed' or 'Cancelled' for the same appointment_id
+    -- Check if there are any results with status 'Pending' for the same appointment_id
     SELECT COUNT(*) INTO not_done
     FROM Results r
     WHERE appointment_id = NEW.appointment_id
     AND status = 'Pending';
 
-    -- If all tests done update the appointment status to 'Completed'
+    -- Check if there is at least one result with status 'Inconclusive' for the same appointment_id
+    SELECT COUNT(*) INTO inconclusive_found
+    FROM Results r
+    WHERE appointment_id = NEW.appointment_id
+    AND outcome = 'Inconclusive';
+
+    -- If all tests are done (no 'Pending') and there are no inconclusive results, update the appointment status to 'Completed'
     IF not_done = 0 THEN
-        UPDATE Appointments
-        SET status = 'Completed'
-        WHERE appointment_id = New.appointment_id;
+        IF inconclusive_found > 0 THEN
+            UPDATE Appointments
+            SET status = 'Completed (w/ Follow-up Advised)'
+            WHERE appointment_id = NEW.appointment_id;
+        ELSE
+            UPDATE Appointments
+            SET status = 'Completed'
+            WHERE appointment_id = NEW.appointment_id;
+        END IF;
     END IF;
 END;$$
 
@@ -837,8 +920,8 @@ COMMIT;
 START TRANSACTION;
 USE `diagnosticsdb`;
 INSERT INTO `diagnosticsdb`.`Results` (`appointment_id`, `test_type`, `staff_id`, `outcome`, `comments`, `status`) VALUES (3001, 'C19', 2014, 'Positive', 'patient already came in with symptoms consistent with COVID-19, including loss of taste and smell', 'Completed');
-INSERT INTO `diagnosticsdb`.`Results` (`appointment_id`, `test_type`, `staff_id`, `outcome`, `comments`, `status`) VALUES (3001, 'CBC', 2002, 'Abnormal-Above', NULL, 'Completed');
-INSERT INTO `diagnosticsdb`.`Results` (`appointment_id`, `test_type`, `staff_id`, `outcome`, `comments`, `status`) VALUES (3001, 'UA', 2003, 'Normal', NULL, 'Completed');
+INSERT INTO `diagnosticsdb`.`Results` (`appointment_id`, `test_type`, `staff_id`, `outcome`, `comments`, `status`) VALUES (3001, 'CBC', 2002, 'Abnormal (Above Range)', DEFAULT, 'Completed');
+INSERT INTO `diagnosticsdb`.`Results` (`appointment_id`, `test_type`, `staff_id`, `outcome`, `comments`, `status`) VALUES (3001, 'UA', 2003, 'Inconclusive', 'patient did not provide enough urine sample', 'Completed');
 
 COMMIT;
 
