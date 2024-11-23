@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+  <persistence-unit name="default">
+    <class>entities.Appointment</class>
+    <class>entities.Patient</class>
+    <class>entities.Result</class>
+    <class>entities.ResultId</class>
+    <class>entities.Equipment</class>
+    <class>entities.Payment</class>
+    <class>entities.RefInsuranceinfo</class>
+    <class>entities.RefOutcome</class>
+    <class>entities.RefOutcomeId</class>
+    <class>entities.RefOutcomestype</class>
+    <class>entities.Staff</class>
+    <class>entities.Test</class>
+    <properties>
+      <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/diagnosticsdb"/>
+      <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="hibernate.connection.user" value="user"/>
+      <property name="hibernate.connection.password" value="pass123"/>
+      <property name="hibernate.show_sql" value="true"/>
+    </properties>
+
+  </persistence-unit>
+</persistence>
