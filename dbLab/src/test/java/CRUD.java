@@ -42,30 +42,7 @@ public class CRUD<T> {
     {
         try (Session session = factory.openSession())
         {
-            var query = session.createQuery(hql, this.entity);
-            return query.getResultList();
-        }
-    }
-
-
-    public List<T> read(String firstName, String lastName)
-    {
-        try (Session session = factory.openSession())
-        {
-            return session.createQuery(
-                            "FROM " + this.entity.getName() +
-                                    " WHERE firstName = :firstName AND lastName = :lastName", this.entity)
-                    .setParameter("firstName", firstName)
-                    .setParameter("lastName", lastName)
-                    .getResultList();
-        }
-    }
-
-    public List<T> read()
-    {
-        try (Session session = factory.openSession())
-        {
-            return session.createQuery("FROM " + this.entity.getName(), this.entity).list();
+            return session.createQuery(hql, this.entity).getResultList();
         }
     }
 
