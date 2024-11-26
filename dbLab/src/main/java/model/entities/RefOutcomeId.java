@@ -2,6 +2,7 @@ package model.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import model.enumerations.ResultOutcome;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
@@ -9,18 +10,18 @@ import java.util.Objects;
 
 @Embeddable
 public class RefOutcomeId implements Serializable {
-    private static final long serialVersionUID = -8333443309043675885L;
-    @Column(name = "outcome", nullable = false, length = 30)
-    private String outcome;
+    private static final long serialVersionUID = 3319169700294804535L;
+    @Column(name = "outcome", nullable = false, length = 45)
+    private ResultOutcome outcome;
 
     @Column(name = "outcome_type", nullable = false)
     private Byte outcomeType;
 
-    public String getOutcome() {
+    public ResultOutcome getOutcome() {
         return outcome;
     }
 
-    public void setOutcome(String outcome) {
+    public void setOutcome(ResultOutcome outcome) {
         this.outcome = outcome;
     }
 

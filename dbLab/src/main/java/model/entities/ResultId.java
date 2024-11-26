@@ -4,14 +4,12 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import org.hibernate.Hibernate;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
 public class ResultId implements Serializable {
-    @Serial
-    private static final long serialVersionUID = -5909730631115364278L;
+    private static final long serialVersionUID = -850915538142445629L;
     @Column(name = "appointment_id", nullable = false)
     private Integer appointmentId;
 

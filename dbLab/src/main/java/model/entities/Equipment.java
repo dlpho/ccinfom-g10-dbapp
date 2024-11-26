@@ -1,12 +1,12 @@
 package model.entities;
 
-
 import jakarta.persistence.*;
+import model.enumerations.EquipmentCondition;
+import model.enumerations.EquipmentLocation;
 
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import model.enumerations.*;
 
 @Entity
 @Table(name = "equipment", schema = "diagnosticsdb")
@@ -15,11 +15,11 @@ public class Equipment {
     @Column(name = "equip_name", nullable = false, length = 45)
     private String equipName;
 
-    @Lob
+    @Enumerated(EnumType.STRING)
     @Column(name = "location", nullable = false)
     private EquipmentLocation location;
 
-    @Lob
+    @Enumerated(EnumType.STRING)
     @Column(name = "`condition`", nullable = false)
     private EquipmentCondition condition;
 

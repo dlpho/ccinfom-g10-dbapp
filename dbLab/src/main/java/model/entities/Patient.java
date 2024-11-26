@@ -1,11 +1,13 @@
 package model.entities;
+
+import model.enumerations.Gender;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import model.enumerations.*;
 
 @Entity
 @Table(name = "patients", schema = "diagnosticsdb", indexes = {
@@ -31,7 +33,7 @@ public class Patient {
     @Column(name = "date_of_birth", nullable = false)
     private LocalDate dateOfBirth;
 
-    @Lob
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
     private Gender gender;
 
@@ -51,6 +53,7 @@ public class Patient {
     private Integer zipCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @JoinColumn(name = "insurance_provider")
     private RefInsuranceinfo insuranceProvider;
 
@@ -59,6 +62,10 @@ public class Patient {
 
     public Patient() {
 
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public Patient(String lastName, String firstName, String middleName, LocalDate dateOfBirth, Gender gender,
@@ -75,10 +82,6 @@ public class Patient {
         this.province = province;
         this.zipCode = zipCode;
         this.insuranceProvider = insuranceProvider;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public void setId(Integer id) {

@@ -3,7 +3,7 @@
   <component name="JpaBuddyIdeaProjectConfig" migrateIndexesAndConstraints="true" reUseTableSchema="true">
     <option name="defaultUnitInitialized" value="true" />
     <option name="migrateIndexesAndConstraints" value="true" />
-    <option name="reLastEntityCreationPackage" value="src/main/java/enumerations" />
+    <option name="reLastEntityCreationPackage" value="src/main/java/entity" />
     <option name="renamerInitialized" value="true" />
     <option name="reverseEngineeringLastDbConnectionId" value="95533bd6-41c1-46c8-a8d7-10bc26d206a0__diagnosticsdb" />
   </component>

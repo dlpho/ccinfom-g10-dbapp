@@ -1,10 +1,10 @@
 package model.entities;
+
 import jakarta.persistence.*;
 import model.enumerations.AppointmentStatus;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
 
 import java.time.Instant;
 import java.util.LinkedHashSet;
@@ -16,6 +16,7 @@ import java.util.Set;
 })
 public class Appointment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "appointment_id", nullable = false)
     private Integer id;
 
@@ -37,7 +38,8 @@ public class Appointment {
     @Column(name = "test_date", nullable = false)
     private Instant testDate;
 
-    @Lob
+    @ColumnDefault("'In-Progress'")
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private AppointmentStatus status;
 

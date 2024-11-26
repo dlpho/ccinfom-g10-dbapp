@@ -1,6 +1,6 @@
 package model.entities;
 
-import model.enumerations.*;
+import model.enumerations.PaymentMethod;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
@@ -9,11 +9,12 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.time.Instant;
 
 @Entity
-@Table(name = "payment", schema = "diagnosticsdb", indexes = {
+@Table(name = "payments", schema = "diagnosticsdb", indexes = {
         @Index(name = "order_id_idx", columnList = "appointment_id")
 })
 public class Payment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_id", nullable = false)
     private Integer id;
 
@@ -25,7 +26,8 @@ public class Payment {
     @Column(name = "total_cost", nullable = false)
     private Double totalCost;
 
-    @Lob
+    @ColumnDefault("'N/A'")
+    @Enumerated(EnumType.STRING)
     @Column(name = "payment_method", nullable = false)
     private PaymentMethod paymentMethod;
 

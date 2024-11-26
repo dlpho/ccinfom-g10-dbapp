@@ -2,7 +2,6 @@ package model.entities;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -13,8 +12,8 @@ public class RefInsuranceinfo {
     @Column(name = "insurance_provider", nullable = false, length = 45)
     private String insuranceProvider;
 
-    @Column(name = "pct_coverage", nullable = false, precision = 3, scale = 2)
-    private BigDecimal pctCoverage;
+    @Column(name = "pct_coverage", nullable = false)
+    private Float pctCoverage;
 
     @Column(name = "min_amount", nullable = false)
     private Double minAmount;
@@ -30,11 +29,11 @@ public class RefInsuranceinfo {
         this.insuranceProvider = insuranceProvider;
     }
 
-    public BigDecimal getPctCoverage() {
+    public Float getPctCoverage() {
         return pctCoverage;
     }
 
-    public void setPctCoverage(BigDecimal pctCoverage) {
+    public void setPctCoverage(Float pctCoverage) {
         this.pctCoverage = pctCoverage;
     }
 

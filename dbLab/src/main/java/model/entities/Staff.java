@@ -1,7 +1,7 @@
 package model.entities;
-import model.enumerations.*;
 
 import jakarta.persistence.*;
+import model.enumerations.StaffRole;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -25,7 +25,7 @@ public class Staff {
     @Column(name = "middle_name", nullable = false, length = 20)
     private String middleName;
 
-    @Lob
+    @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private StaffRole role;
 
